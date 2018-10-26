@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HotSLogs Build Selector
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.3.0
 // @description  Display per-talent build expectations alongside carousel builds
 // @author       Jacques Marcotte
 // @match        https://www.hotslogs.com/Sitewide/HeroDetails*
@@ -74,6 +74,15 @@
       win_percent_cell.append(' v. ' + (alternate_build_score * 100).toFixed(1) + ' %');
     });
   }
+
+  // Add a button to the page
+  console.log("Adding Build Display button");
+  ros_cell = document.createElement('div');
+  ros_cell.id = 'ros_cell';
+  ros_cell.style = "position:fixed; bottom: 20px; left: 80px; font-size: 14px; cursor: pointer; font-weight: bold";
+  ros_cell.innerHTML = "Add<BR>Build<BR>Display";
+  document.body.appendChild(ros_cell);
+  $(ros_cell).click(window.displayBuildScores);
 
   window.displayBuildScores();
 
