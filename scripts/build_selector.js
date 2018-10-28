@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HotSLogs Build Selector
 // @namespace    http://tampermonkey.net/
-// @version      0.3.0
+// @version      1.0.0
 // @description  Display per-talent build expectations alongside carousel builds
 // @author       Jacques Marcotte
 // @match        https://www.hotslogs.com/Sitewide/HeroDetails*
@@ -55,6 +55,9 @@
 
     let build_cards = $('div.talentBuildCard');
     build_cards.each(function(index, build_card) {
+      if (build_card.hasAttribute('build-calculated')) {
+        return;
+      }
       let talent_rows = $(build_card).find('table.talentBuildCardContent tr');
       let scores = [];
       talent_rows.each(function(index, talent_row) {
@@ -72,18 +75,9 @@
 
       let win_percent_cell = $(build_card).find('table.talentBuildCardHeader tr').first().find('td').last();
       win_percent_cell.append(' v. ' + (alternate_build_score * 100).toFixed(1) + ' %');
+      build_card.setAttribute('build-calculated',true);
     });
   }
 
-  // Add a button to the page
-  console.log("Adding Build Display button");
-  ros_cell = document.createElement('div');
-  ros_cell.id = 'ros_cell';
-  ros_cell.style = "position:fixed; bottom: 20px; left: 80px; font-size: 14px; cursor: pointer; font-weight: bold";
-  ros_cell.innerHTML = "Add<BR>Build<BR>Display";
-  document.body.appendChild(ros_cell);
-  $(ros_cell).click(window.displayBuildScores);
-
-  window.displayBuildScores();
-
+  setInterval(window.displayBuildScores, 2000);
 })();
