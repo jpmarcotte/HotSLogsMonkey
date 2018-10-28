@@ -61,12 +61,5 @@
     });
   };
 
-  // Add a button to the page
-  console.log("Adding RoS button");
-  ros_cell = document.createElement('div');
-  ros_cell.id = 'ros_cell';
-  ros_cell.style = "position:fixed; bottom: 20px; left: 20px; font-size: 14px; cursor: pointer; font-weight: bold";
-  ros_cell.innerHTML = "Add<BR>RoS";
-  document.body.appendChild(ros_cell);
-  $(ros_cell).click(window.addRoS);
+  setInterval(window.addRoS, 2000);
 })();
