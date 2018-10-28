@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HotSLogs Extra Data
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2.0
 // @description  Adds extra columns to HotSLogs data tables
 // @author       Jacques Marcotte
 // @match        https://www.hotslogs.com/*
